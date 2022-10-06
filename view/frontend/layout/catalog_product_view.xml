@@ -12,7 +12,7 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <referenceContainer name="content">
+        <referenceContainer name="columns.top">
             <block class="Magepow\FreeShippingBar\Block\FreeShippingBar" cacheable="false" ifconfig="magepow_freeshippingbar/display_on_page/product_page" name="freeshippingbar.productpage" template="Magepow_FreeShippingBar::freeshippingbar.phtml" before="-" />
         </referenceContainer>
     </body>
