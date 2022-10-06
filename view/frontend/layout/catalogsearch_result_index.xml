@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * acl
+ *
+ * @copyright Copyright © 2020 Magepow. All rights reserved.
+ * @author    @copyright Copyright (c) 2014 Magepow (<https://www.magepow.com>)
+ * @license <https://www.magepow.com/license-agreement.html>
+ * @Author: magepow<support@magepow.com>
+ * @github: <https://github.com/magepow>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Magepow\FreeShippingBar\Block\FreeShippingBar" cacheable="false" ifconfig="magepow_freeshippingbar/display_on_page/search_result_page" name="freeshippingbar.searchresult" template="Magepow_FreeShippingBar::freeshippingbar.phtml" before="-" />
+        </referenceContainer>
+    </body>
+</page>

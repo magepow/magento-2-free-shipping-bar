@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * acl
+ *
+ * @copyright Copyright © 2020 Magepow. All rights reserved.
+ * @author    @copyright Copyright (c) 2014 Magepow (<https://www.magepow.com>)
+ * @license <https://www.magepow.com/license-agreement.html>
+ * @Author: magepow<support@magepow.com>
+ * @github: <https://github.com/magepow>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magepow" translate="label" sortOrder="3">
+            <label><![CDATA[Magepow]]></label>
+        </tab>
+        <section id="magepow_freeshippingbar" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Free Shipping Bar</label>
+            <tab>magepow</tab>
+            <resource>Magepow_FreeShippingBar::config_freeshippingbar</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Version 1.0.0</comment>
+                </field>
+
+                <field id="free_shipping_threshold" translate="label" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Free Shipping Threshold</label>
+                    <frontend_model>Magepow\FreeShippingBar\Block\System\Config\Form\Field\FreeShippingThreshold</frontend_model>
+                    <backend_model>Magepow\FreeShippingBar\Model\Config\Backend\ArraySerialized</backend_model>
+                    <comment>
+                        <![CDATA[
+                        {Click STORES > Configuration > SALES > Delivery Methods >Free Shipping > Minimum Order Amount .To configure the value free shipping} 
+                        <br><br><hr>
+                        {freeShippingAmount}    =>  STORES > Configuration > SALES > Delivery Methods > Free Shipping > Minimum Order Amount 
+                        <br><br><hr>
+                        {cartSubtotal}          =>  Order Cart Subtotal 
+                        <br><br><hr>
+                        {leftValue}             =>  {freeShippingAmount} - {cartSubtotal}
+
+
+                        ]]></comment>
+                </field>
+
+                <field id="success_message" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Success Message</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="position" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Position Fixed</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <!-- <field id="sticker" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Sticker</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="allow_close" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Allow to Close</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field> -->
+
+                <field id="auto_hide" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Auto-hide after(second)</label>
+                    <validate>validate-number</validate>
+                    <comment>Leaving empty will not hide . Enter the amount of time if you want the message to be hidden after the number of seconds.</comment>
+                </field>
+
+                <field id="symbol_price_left_right" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Symbol Price Left Right</label>
+                    <source_model>Magepow\FreeShippingBar\Model\Config\Source\PriceLeftRight</source_model>
+                    <comment>Leaving empty will not hide . Enter the amount of time if you want the message to be hidden after the number of seconds.</comment>
+                </field>
+
+
+
+            </group>
+            <group id="display_on_page" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <label>Display on Pages</label>
+                <field id="homepage" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Home Page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="category_page" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Category Page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="search_result_page" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Search Result Page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="product_page" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Product Page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cart_page" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Cart Page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="checkout_page" translate="label" type="select" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Checkout Page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="design" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Design</label>
+                <field id="font_type" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Font Type</label>
+                    <source_model>Magepow\FreeShippingBar\Model\Config\Source\FontFamily</source_model>
+                </field>
+                <field id="font_size" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Font Size</label>
+                    <validate>required-entry validate-number</validate>
+                </field>
+                <field id="text_color" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Text Color</label>
+                    <frontend_model>Magepow\FreeShippingBar\Block\Color</frontend_model>
+                </field>
+                <field id="background_color" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Background Color</label>
+                    <frontend_model>Magepow\FreeShippingBar\Block\Color</frontend_model>
+                </field>
+                <field id="price_color" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Price Color</label>
+                    <frontend_model>Magepow\FreeShippingBar\Block\Color</frontend_model>
+                </field>
+
+                <field id="text_align" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Text Align</label>
+                    <source_model>Magepow\FreeShippingBar\Model\Config\Source\TextAlign</source_model>
+                </field>
+
+                <field id="width" type="text" translate="label comment tooltip" sortOrder="65" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Width Sidebar(%)</label>
+                    <validate>required-entry validate-number</validate>
+                </field>
+
+                <field id="custom_css" type="textarea" translate="label comment tooltip" sortOrder="65" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>CSS</label>
+                    <comment>Custom Extra Styles.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

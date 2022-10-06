@@ -1,0 +1,151 @@
+<?php
+/**
+ * Container
+ *
+ * @copyright Copyright © 2020 Magepow. All rights reserved.
+ * @author    @copyright Copyright (c) 2014 Magepow (<https://www.magepow.com>)
+ * @license <https://www.magepow.com/license-agreement.html>
+ * @Author: magepow<support@magepow.com>
+ * @github: <https://github.com/magepow>
+ */
+?>
+<?php
+// @codingStandardsIgnoreFile
+/**
+ *
+ *
+ * @var $block \Magepow\FreeShippingBar\Block\FreeShippingBar
+ */
+?>
+
+<?php
+    $helper = $this->helper('Magepow\FreeShippingBar\Helper\Data');
+
+    if(!$helper->getConfigModule('general/enable')) return;
+    
+    $helperPrice = $this->helper('Magento\Framework\Pricing\Helper\Data');
+
+    $jsonHelper = $this->helper('Magento\Framework\Json\Helper\Data');
+
+    $fontFamily = $helper->getConfigModule('design/font_type');
+
+    $position = $helper->getConfigModule('general/position');
+
+    $fontSize = $helper->getConfigModule('design/font_size');
+
+    $color = $helper->getConfigModule('design/text_color');
+
+    $background = $helper->getConfigModule('design/background_color');
+
+    $customStyle = $helper->getConfigModule('design/custom_css');
+
+    $textAlign = $helper->getConfigModule('design/text_align');
+
+    $freeShipping = $helper->getConfig('carriers/freeshipping/free_shipping_subtotal');
+
+    $symbol = $helper->getStore()->getBaseCurrency()->getCurrencySymbol();
+
+    $amountsub = ($block->amountsub() != NULL) ? floatval($block->amountsub()) : 0;
+
+    $threshold = $block->checkCustomerGroup();
+
+    $symbolPrice = $helper->getConfigModule('general/symbol_price_left_right');
+
+    $width = $helper->getConfigModule('design/width');
+
+    $height = $helper->getConfigModule('design/height');
+
+    $message = $threshold['message'];
+
+    $messageSuccess = $helper->getConfigModule('general/success_message');
+
+    $priceColor = $helper->getConfigModule('design/price_color');
+    $colorText = $helper->getConfigModule('design/text_color');
+
+    $autoHide = $helper->getConfigModule('general/auto_hide');
+
+    $only = (int) $freeShipping - $amountsub;
+
+
+    $free = ($symbolPrice == 'left') ? $symbol.number_format($freeShipping , 2, "," , "." ) : number_format($freeShipping , 2, "," , "." ).$symbol;
+
+    $only = ($symbolPrice == 'left') ? $symbol.number_format($only , 2, "," , "." ) : number_format($only , 2, "," , "." ).$symbol;
+
+    $amountsubSymbol = ($symbolPrice == 'left') ? $symbol.number_format($amountsub , 2, "," , "." ) : number_format($amountsub , 2, "," , "." ).$symbol;
+
+    if (str_contains($message, '{leftValue}')) {
+        $message =  str_replace(
+                        "{leftValue}", 
+                        '<em style="color:'.$priceColor.';"><span class="price">'.$only.'</span></em>',
+                        $message );
+    }
+    if (str_contains($message, '{freeShippingAmount}')) {
+        $message =  str_replace(
+                    "{freeShippingAmount}", 
+                    '<em style="color:'.$priceColor.';"><span class="price">'.$free.'</span></em>',
+                    $message );
+    }
+
+    if (str_contains($message, '{cartSubtotal}')) {
+        $message =  str_replace(
+                    "{cartSubtotal}", 
+                    '<em style="color:'.$priceColor.';"><span class="price">'.$amountsubSymbol.'</span></em>',
+                    $message );
+    }
+
+?>
+<div class="wrap-free-shipping-bar-message">
+    <div id="free-shipping-bar-message">
+        <?php if($amountsub == 0) : ?>
+
+                <?php echo $message ?>
+
+        <?php elseif($amountsub >=  $freeShipping) :?>
+            
+                <?php echo $messageSuccess;?>
+          
+        <?php else :?>
+                <?php echo $message?>
+            
+        <?php endif;?>
+    </div>
+</div>
+<style type="text/css">
+    #free-shipping-bar-message{
+        background-color: <?php echo $background ?>; 
+        text-align: <?php echo $textAlign ?>;
+        color: <?php echo $colorText ?>;
+        font-family: <?php echo $fontFamily ?>;
+        width: <?php echo $width.'%' ?>;
+        height: auto;
+        font-size: <?php echo $fontSize.'px'; ?>;  
+        <?php echo $customStyle; ?>
+        margin: auto;
+    }
+
+    #free-shipping-bar-message.position-message{
+        top: 0;
+        position: fixed;
+        z-index: 100;
+    }
+    .wrap-free-shipping-bar-message{
+        width: 100%;
+        padding: 10px 0;
+    }
+</style>
+<script type="text/x-magento-init">
+    {
+        "body": {
+            "messageJsFreeShippingBar": {
+                "messageSuccess": "<?php echo $messageSuccess; ?>",
+                "autoHideTimer": <?php echo $autoHide ? $autoHide : 0 ?>,
+                "thresholdMessage" : <?php echo $jsonHelper->jsonEncode($threshold) ?>,
+                "freeShippingAmount": <?php echo $freeShipping ?>,
+                "colorPrice" : "<?php echo $priceColor; ?>",
+                "symbol"    : "<?php echo $symbol ?>",
+                "rightLeft" : "<?php echo $symbolPrice ?>",
+                "position"  : <?php echo $position ? $position : 0 ?>
+            }
+        }
+    }
+</script>
