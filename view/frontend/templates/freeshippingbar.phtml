@@ -21,7 +21,7 @@
 <?php
     $helper = $this->helper('Magepow\FreeShippingBar\Helper\Data');
 
-    if(!$helper->getConfigModule('general/enable')) return;
+    if(!$helper->getConfigModule('general/enable') || $helper->getConfig('carriers/freeshipping/free_shipping_subtotal') == null) return;
     
     $helperPrice = $this->helper('Magento\Framework\Pricing\Helper\Data');
 
