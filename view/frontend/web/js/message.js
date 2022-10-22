@@ -80,7 +80,7 @@ define([
                     }, 500);
                 }
 
-                this.slideBar();
+                _this.slideBar();
 
             }, this);
         },

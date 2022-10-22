@@ -45,7 +45,7 @@
 
     $symbol = $helper->getSymbol();
 
-    $taxAmount = $block->getBaseTaxAmount();
+    $taxAmount = $block->getBaseTaxAmount() ? $block->getBaseTaxAmount() : 0;
 
     $amountsub = ($block->amountsub() != NULL) ? floatval($block->amountsub()) : 0;
 
