@@ -43,7 +43,9 @@
 
     $freeShipping = $helper->getConfig('carriers/freeshipping/free_shipping_subtotal');
 
-    $symbol = $helper->getStore()->getBaseCurrency()->getCurrencySymbol();
+    $symbol = $helper->getSymbol();
+
+    $taxAmount = $block->getBaseTaxAmount();
 
     $amountsub = ($block->amountsub() != NULL) ? floatval($block->amountsub()) : 0;
 
@@ -73,6 +75,8 @@
 
     $amountsubSymbol = ($symbolPrice == 'left') ? $symbol.number_format($amountsub , 2, "," , "." ) : number_format($amountsub , 2, "," , "." ).$symbol;
 
+    $taxAmount = ($symbolPrice == 'left') ? $symbol.number_format($taxAmount , 2, "," , "." ) : number_format($taxAmount , 2, "," , "." ).$symbol;
+
     if (str_contains($message, '{leftValue}')) {
         $message =  str_replace(
                         "{leftValue}", 
@@ -90,6 +94,13 @@
         $message =  str_replace(
                     "{cartSubtotal}", 
                     '<em style="color:'.$priceColor.';"><span class="price">'.$amountsubSymbol.'</span></em>',
+                    $message );
+    }
+
+    if (str_contains($message, '{taxAmount}')) {
+        $message =  str_replace(
+                    "{taxAmount}", 
+                    '<em style="color:'.$priceColor.';"><span class="price tax">'.$taxAmount.'</span></em>',
                     $message );
     }
 
@@ -112,6 +123,9 @@
 </div>
 <style type="text/css">
     #free-shipping-bar-message{
+        <?php echo $customStyle; ?>
+    }
+    #free-shipping-bar-message{
         background-color: <?php echo $background ?>; 
         text-align: <?php echo $textAlign ?>;
         color: <?php echo $colorText ?>;
@@ -119,12 +133,13 @@
         width: <?php echo $width.'%' ?>;
         height: auto;
         font-size: <?php echo $fontSize.'px'; ?>;  
-        <?php echo $customStyle; ?>
         margin: auto;
     }
 
+
+
     #free-shipping-bar-message.position-message{
-        top: 0;
+        top: 46px;
         position: fixed;
         z-index: 100;
     }
@@ -144,7 +159,8 @@
                 "colorPrice" : "<?php echo $priceColor; ?>",
                 "symbol"    : "<?php echo $symbol ?>",
                 "rightLeft" : "<?php echo $symbolPrice ?>",
-                "position"  : <?php echo $position ? $position : 0 ?>
+                "position"  : <?php echo $position ? $position : 0 ?>,
+                "urlShipping"       : "<?php echo $this->getUrl('freeshippingbar/index/index') ?>"
             }
         }
     }

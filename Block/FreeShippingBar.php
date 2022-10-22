@@ -47,26 +47,19 @@ class FreeShippingBar extends Template
         $this->helper=$helper;
         $this->customerSession = $customerSession;
     }
-    public function rate(){
-        // $currencyCode = $storeManager->getStore()->getCurrentCurrencyCode();
-        $rate1 = $this->helper->getStore()->getBaseCurrency()->getRate('USD');
-        return $rate1; 
-    }
-
-    public function rate1(){
-
-        $currencyCode = $this->helper->getStore()->getCurrentCurrencyCode();
-        $rate1 = $this->helper->getStore()->getBaseCurrency()->getRate($currencyCode);
-        return $rate1; 
-    }
 
     
     public function amountsub()
     {
         $model = $this->_cart->create();
-        $grandTotal = $model->getQuote()->getGrandTotal();
-        return $grandTotal;
+        $subtotal = $model->getQuote()->getSubtotal();
+        return $subtotal;
+    }
 
+    public function getTaxAmount()
+    {
+        $model = $this->_cart->create();
+        return $model->getQuote()->getShippingAddress()->getBaseTaxAmount();
     }
 
 
