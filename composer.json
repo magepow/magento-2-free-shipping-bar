@@ -1,6 +1,9 @@
 {
     "name": "magepow/free-shipping-bar",
     "description": "Magepow Free Shipping Bar",
+    "require": {
+        "magepow/core": "^1.0.0"
+    },
     "type": "magento2-module",
     "license": [
         "OSL-3.0",
