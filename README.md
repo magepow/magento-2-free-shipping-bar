@@ -1,4 +1,9 @@
 ### How to install Magento 2 Free Shipping Bar
+
+[![Latest Stable Version](https://poser.pugx.org/magepow/free-shipping-bar/v/stable)](https://packagist.org/packages/magepow/free-shipping-bar)
+[![Total Downloads](https://poser.pugx.org/magepow/free-shipping-bar/downloads)](https://packagist.org/packages/magepow/free-shipping-bar)
+[![Daily Downloads](https://poser.pugx.org/magepow/free-shipping-bar/d/daily)](https://packagist.org/packages/magepow/free-shipping-bar)
+
 **Install Ajax add to cart for Magento 2 via composer (recommend)**
 
 Run the following command in Magento 2 root folder:
