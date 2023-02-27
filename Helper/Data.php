@@ -119,7 +119,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
         return $value;
     }
-
+    
+    public function getSymbol() {
+        return $this ->storeManager->getStore()->getBaseCurrency()->getCurrencySymbol();
+    }
 
     /**
      * @return array
