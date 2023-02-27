@@ -22,7 +22,7 @@ class Color extends \Magento\Config\Block\System\Config\Form\Field
         $value = $element->getData('value');
 
         $html .= '<script type="text/javascript">
-            require(["jquery","Magepow_FreeShippingBar/js/colorpicker"], function ($) {
+            require(["jquery","Magepow_FreeShippingBar/js/colorpicker.min"], function ($) {
                 $(document).ready(function () {
                     var el = $("#' . $element->getHtmlId() . '");
                     el.css("backgroundColor", "'. $value .'");
