@@ -1,3 +1,5 @@
+[<img src="https://github.com/magepow/themeforest/blob/master/shopify/shopify_affiliate.jpg" >](https://shopify.pxf.io/VyL446)
+
 ### How to install Magento 2 Free Shipping Bar
 
 [![Latest Stable Version](https://poser.pugx.org/magepow/free-shipping-bar/v/stable)](https://packagist.org/packages/magepow/free-shipping-bar)
